@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script listens on port 98 on localhost and prints received text
+
+# Start listening on port 98 and print any received data
+nc -l -p 98

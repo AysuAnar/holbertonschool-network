@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This script updates the system, backs up the hosts file, and configures custom DNS entries
+
+# Update and upgrade the system
+sudo apt update && sudo apt upgrade -y
+
+# Backup the original hosts file
+sudo cp /etc/hosts /etc/hosts.bak
+
+# Add new entries to the hosts file
+echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
+
+# Display the updated hosts file
+cat /etc/hosts
+
+echo "Configuration complete."
