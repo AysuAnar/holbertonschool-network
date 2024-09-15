@@ -1,0 +1,62 @@
+Have you ever wondered what goes on behind the scenes when you type a URL in your browser and hit Enter? This simple action triggers a complex series of events that involve multiple layers of the web stack. In this post, I’ll break down each step in this process, covering concepts like DNS, TCP/IP, firewalls, HTTPS/SSL, load balancers, web servers, application servers, and databases.
+
+1. DNS Request: Translating Domain Name to IP Address
+When you type https://www.google.com, the first thing that happens is a Domain Name System (DNS) request. DNS acts like the phonebook of the internet. Your browser needs to convert the human-readable domain name into an IP address, the actual address that computers use to communicate.
+
+Here’s how it works:
+
+The browser checks its cache to see if it already knows the IP address for www.google.com. If not, it sends a query to a DNS server.
+If the DNS server doesn’t have the record, it queries other DNS servers until it finds the correct IP address.
+Once the IP address is found (e.g., 142.250.190.46 for Google), it is sent back to the browser, and now the browser knows where to send your request.
+2. TCP/IP: Establishing a Connection
+With the IP address in hand, the browser initiates a connection to Google’s server using the Transmission Control Protocol (TCP) over the Internet Protocol (IP). TCP/IP is the fundamental communication protocol of the internet.
+
+Steps:
+
+The browser sends a TCP handshake request to Google’s server. This involves a three-step process (SYN, SYN-ACK, ACK), where the client and server agree on connection parameters like packet size and windowing.
+Once the connection is established, data can be exchanged between the client (your browser) and the server.
+3. Firewall: Security Checkpoints
+Firewalls sit between your computer and the internet, acting as security guards. They inspect incoming and outgoing traffic to ensure nothing harmful enters or exits. Both your device and Google’s servers likely have firewalls that filter out potentially malicious data.
+
+The firewall:
+
+Verifies whether the request is legitimate.
+Ensures that only safe data packets are allowed through.
+4. HTTPS and SSL/TLS: Securing the Connection
+You may have noticed that the URL begins with https://. This means the connection is encrypted using Secure Sockets Layer (SSL) or its more modern version, Transport Layer Security (TLS). Here’s how it works:
+
+The browser and the server initiate an SSL/TLS handshake. The server sends its SSL certificate to the browser, which contains a public key.
+The browser verifies the certificate’s authenticity, ensuring it comes from a trusted Certificate Authority (CA).
+Once the browser trusts the certificate, it generates a session key, encrypts it using the server’s public key, and sends it to the server.
+Both the browser and the server use this session key to encrypt and decrypt the data exchanged, ensuring that no one can eavesdrop on the communication.
+5. Load Balancer: Distributing Traffic
+Once the request reaches Google’s infrastructure, it encounters a load balancer. Google’s services are highly scalable, meaning they don’t run on a single server but across many servers in different data centers.
+
+The load balancer:
+
+Distributes incoming requests across multiple servers to ensure no single server is overwhelmed.
+Optimizes performance by directing traffic to servers with the least load or those geographically closer to the user.
+6. Web Server: Handling the Request
+After the load balancer routes your request, it lands on one of Google’s web servers. The web server’s job is to understand the HTTP request (such as GET or POST) and serve static content like HTML, CSS, JavaScript, or images.
+
+For example:
+
+If you’re requesting the Google homepage, the web server will serve the necessary HTML file along with linked resources like images and stylesheets.
+If dynamic content is needed, the web server will pass the request to the application server.
+7. Application Server: Processing Logic
+For more complex tasks like executing search queries or logging in, the web server forwards the request to an application server. This server processes the business logic.
+
+In the case of a search query:
+
+The application server processes your request (e.g., “What is the weather today?”), applies search algorithms, and pulls relevant data.
+8. Database: Storing and Retrieving Data
+Finally, if the request involves accessing or updating data (e.g., user information, search results), the application server interacts with a database. Google’s databases contain massive amounts of data spread across multiple locations.
+
+The database:
+
+Retrieves relevant information (e.g., cached search results).
+Sends it back to the application server, which formats the response and passes it back to the web server.
+Conclusion: Sending the Response Back
+After the web server receives the processed response from the application server, it sends the data back to your browser. The browser renders the content, displaying the Google homepage or search results.
+
+If you’re a front-end developer, the browser’s rendering process is especially important. It involves parsing HTML, constructing the Document Object Model (DOM), applying CSS, and executing JavaScript.
